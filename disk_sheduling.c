@@ -38,7 +38,7 @@ void fcfs(int *arr , int size ,int head) {
 
 
 
-// goes left then right
+// goes left till 0 , then right
 void scan(int *arr, int n, int head) {
     int pivot, left, right, seektime;
     int total_seek_count = 0, current_head = head;
@@ -77,7 +77,7 @@ void scan(int *arr, int n, int head) {
     printf("\nThe total number of seek operations in SCAN = %d\n" , total_seek_count);
 }
 
-// goes right 
+// goes right till the end , then goes back to 0 , then continues going right
 void cscan(int *arr, int n, int head) {
     int pivot, left, right, seektime;
     int total_seek_count = 0, current_head = head;
