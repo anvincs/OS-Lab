@@ -73,6 +73,8 @@ void scan(int *arr, int n, int head) {
         current_head = temp_arr[right];
         right++;
     }
+   
+    free(temp_arr);
 
     printf("\nThe total number of seek operations in SCAN = %d\n" , total_seek_count);
 }
@@ -113,17 +115,20 @@ void cscan(int *arr, int n, int head) {
 
     int st = 0;
     while(st<=left) {
-        seektime = temp_arr[left] - current_head;
+        seektime = temp_arr[st] - current_head;
         total_seek_count += seektime;
-        current_head = temp_arr[left];
+        current_head = temp_arr[st];
         st++;
     }
+
+    free(temp_arr);
+
     printf("\nThe total number of seek operations in C-SCAN  = %d\n" , total_seek_count);
 }
 
 int main() {
     int n , head;
-    printf("Enter no. of request sequences : ");
+    printf("Enter no. of requests : ");
     scanf("%d", &n);
     int *arr = malloc(n * sizeof(int));
     printf("Enter the request sequence\n");
