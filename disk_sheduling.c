@@ -20,6 +20,9 @@ void fcfs(int *arr , int size ,int head) {
     int total_seek_count = 0;
     int current_head = head;
 
+    printf("\nThe sequence of head movement\n");
+    printf("%d ",current_head);
+
     for(int i=0;i<size;i++) {
         int seektime;
         if(current_head > arr[i]) {
@@ -31,6 +34,7 @@ void fcfs(int *arr , int size ,int head) {
 
         total_seek_count += seektime;
         current_head = arr[i];
+        printf("%d ",current_head);
     }
 
     printf("\nThe total number of seek operations in FCFS = %d\n" , total_seek_count);
@@ -38,7 +42,7 @@ void fcfs(int *arr , int size ,int head) {
 
 
 
-// goes left till 0 , then right
+// goes left then right
 void scan(int *arr, int n, int head) {
     int pivot, left, right, seektime;
     int total_seek_count = 0, current_head = head;
@@ -56,30 +60,35 @@ void scan(int *arr, int n, int head) {
     }
     left = pivot-1;
     right = pivot+1;
+
+    printf("\nThe sequence of head movement\n");
+    printf("%d ",current_head);
+
     while(left>=0) {
         seektime = current_head-temp_arr[left];
         total_seek_count += seektime;
         current_head = temp_arr[left];
+        printf("%d ",current_head);
         left--;
     }
 
     seektime = current_head - 0;
     total_seek_count += seektime;
     current_head = 0;
+    printf("%d ",current_head);
 
     while(right<n+1) {
         seektime = temp_arr[right] - current_head;
         total_seek_count += seektime;
         current_head = temp_arr[right];
+        printf("%d ",current_head);
         right++;
     }
-   
-    free(temp_arr);
 
     printf("\nThe total number of seek operations in SCAN = %d\n" , total_seek_count);
 }
 
-// goes right till the end , then goes back to 0 , then continues going right
+// goes right 
 void cscan(int *arr, int n, int head) {
     int pivot, left, right, seektime;
     int total_seek_count = 0, current_head = head;
@@ -98,37 +107,41 @@ void cscan(int *arr, int n, int head) {
     left = pivot-1;
     right = pivot+1;
 
+    printf("\nThe sequence of head movement\n");
+    printf("%d ",current_head);
+
     while(right<n+1) {
         seektime = temp_arr[right] - current_head;
         total_seek_count += seektime;
         current_head = temp_arr[right];
+        printf("%d ",current_head);
         right++;
     }
 
     seektime = (DISK_SIZE-1) - current_head;
     total_seek_count += seektime;
     current_head = DISK_SIZE-1;
+    printf("%d ",current_head);
 
     seektime = current_head - 0;
     total_seek_count += seektime;
     current_head = 0;
+    printf("%d ",current_head);
 
     int st = 0;
     while(st<=left) {
         seektime = temp_arr[st] - current_head;
         total_seek_count += seektime;
         current_head = temp_arr[st];
+        printf("%d ",current_head);
         st++;
     }
-
-    free(temp_arr);
-
     printf("\nThe total number of seek operations in C-SCAN  = %d\n" , total_seek_count);
 }
 
 int main() {
     int n , head;
-    printf("Enter no. of requests : ");
+    printf("Enter no. of request sequences : ");
     scanf("%d", &n);
     int *arr = malloc(n * sizeof(int));
     printf("Enter the request sequence\n");
