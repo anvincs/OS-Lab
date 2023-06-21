@@ -42,8 +42,6 @@ void fifo(int *arr, int size) {
 
     for(int i=0;i<size;i++) {
 
-        int flag = 0;
-
         if(frames[nt].value == -1) {
             frames[nt].value = arr[i];
             nt = (nt + 1)%3;
@@ -52,6 +50,8 @@ void fifo(int *arr, int size) {
 
             continue;
         }
+
+        int flag = 0;
 
         for(int j=0;j<3;j++) {
 
@@ -91,7 +91,6 @@ void lru(int *arr, int size) {
 
     for(int i=0;i<size;i++) {
 
-        int flag = 0;
 
         if(frames[nt].value == -1) {
             frames[nt].value = arr[i];
@@ -102,6 +101,8 @@ void lru(int *arr, int size) {
 
             continue;
         }
+
+        int flag = 0;
 
         for(int j=0;j<3;j++) {
 
@@ -153,8 +154,6 @@ void lfu(int *arr, int size, int * freq) {
 
     for (int i = 0; i < size; i++)
     {
-        
-        int flag = 0;
 
         if(frames[nt].value == -1) {
             frames[nt].value = arr[i];
@@ -166,6 +165,8 @@ void lfu(int *arr, int size, int * freq) {
 
             continue;
         }
+
+        int flag = 0;
 
         for(int j=0;j<3;j++) {
 
