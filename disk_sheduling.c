@@ -141,7 +141,7 @@ void cscan(int *arr, int n, int head) {
 
 int main() {
     int n , head;
-    printf("Enter no. of request sequences : ");
+    printf("Enter no. of requests : ");
     scanf("%d", &n);
     int *arr = malloc(n * sizeof(int));
     printf("Enter the request sequence\n");
