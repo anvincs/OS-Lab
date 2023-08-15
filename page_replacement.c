@@ -42,15 +42,6 @@ void fifo(int *arr, int size) {
 
     for(int i=0;i<size;i++) {
 
-        if(frames[nt].value == -1) {
-            frames[nt].value = arr[i];
-            nt = (nt + 1)%3;
-            pageFault++;
-            displayRow(arr[i]);
-
-            continue;
-        }
-
         int flag = 0;
 
         for(int j=0;j<3;j++) {
@@ -60,6 +51,18 @@ void fifo(int *arr, int size) {
                 flag = 1;
                 displayRow(arr[i]);
                 break;
+            }
+        }
+
+        if(flag == 0) {
+            if(frames[nt].value == -1) {
+                frames[nt].value = arr[i];
+                nt = (nt + 1)%3;
+                pageFault++;
+                flag = 1;
+                displayRow(arr[i]);
+
+                continue;
             }
         }
 
@@ -91,17 +94,6 @@ void lru(int *arr, int size) {
 
     for(int i=0;i<size;i++) {
 
-
-        if(frames[nt].value == -1) {
-            frames[nt].value = arr[i];
-            frames[nt].lastUsed = i;
-            nt++;
-            pageFault++;
-            displayRow(arr[i]);
-
-            continue;
-        }
-
         int flag = 0;
 
         for(int j=0;j<3;j++) {
@@ -111,7 +103,20 @@ void lru(int *arr, int size) {
                 frames[j].lastUsed = i;
                 flag = 1;
                 displayRow(arr[i]);
+                flag = 1;
                 break;
+            }
+        }
+
+        if(flag == 0) {
+            if(frames[nt].value == -1) {
+                frames[nt].value = arr[i];
+                frames[nt].lastUsed = i;
+                nt++;
+                pageFault++;
+                displayRow(arr[i]);
+
+                continue;
             }
         }
 
@@ -154,18 +159,7 @@ void lfu(int *arr, int size, int * freq) {
 
     for (int i = 0; i < size; i++)
     {
-
-        if(frames[nt].value == -1) {
-            frames[nt].value = arr[i];
-            frames[nt].lastUsed = i;
-            freq[arr[i]]++;
-            nt++;
-            pageFault++;
-            displayRow(arr[i]);
-
-            continue;
-        }
-
+        
         int flag = 0;
 
         for(int j=0;j<3;j++) {
@@ -177,6 +171,20 @@ void lfu(int *arr, int size, int * freq) {
                 flag = 1;
                 displayRow(arr[i]);
                 break;
+            }
+        }
+
+        if(flag == 0) {
+            if(frames[nt].value == -1) {
+                frames[nt].value = arr[i];
+                frames[nt].lastUsed = i;
+                freq[arr[i]]++;
+                nt++;
+                pageFault++;
+                flag = 1;
+                displayRow(arr[i]);
+
+                continue;
             }
         }
 
